@@ -5,6 +5,7 @@ global using System.Linq.Expressions;
 #endregion
 #region Microsoft Usings
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ValueGeneration;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Microsoft.EntityFrameworkCore.Storage;
 #endregion

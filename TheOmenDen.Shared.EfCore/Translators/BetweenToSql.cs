@@ -1,32 +1,39 @@
 ﻿namespace TheOmenDen.Shared.EfCore.Translators;
 
 
-internal sealed class BetweenToSql
+internal sealed class BetweenToSql : ConditionalExpression
 {
-    // C# => value.IsBetween(lowerBound, upperBound)
-    // Sql => Where value Between lowerBound and upperBound
+    public override bool CanReduce => base.CanReduce;
 
-    // C# => value.IsBetweenExclusiveBounds(lowerBound, upperBound)
-    // Sql => Where value is < upperBound && value > lowerBound
+    public override Type Type => base.Type;
 
-
-    // dbSet.Where(c => c.IsBetween(1,5));
-    // dbSet.IsBetween(c => 1, c=> 5).Where(c => c.Name == name);
-    [DbFunction(name: "Between", schema: "dbo")]
-    public bool Between<T>(T value, Func<T, bool> betweenFunc)
-    where T : IComparable<T>
+    public override bool Equals(object? obj)
     {
-        var sb = StringBuilderPoolFactory<T>.Exists(nameof(T)) ?
-            StringBuilderPoolFactory<T>.Get(nameof(T))
-                : StringBuilderPoolFactory<T>.Create(nameof(T));
+        return base.Equals(obj);
+    }
 
-        //var databaseName = GetDatabaseName();
-        //var schemaName = GetSchemaName();
-        //var tableName = GetTableName();
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 
+    public override Expression Reduce()
+    {
+        return base.Reduce();
+    }
 
-        sb.AppendLine("");
+    public override string ToString()
+    {
+        return base.ToString();
+    }
 
-        return betweenFunc?.Invoke(value) ?? false;
+    protected override Expression Accept(ExpressionVisitor visitor)
+    {
+        return base.Accept(visitor);
+    }
+
+    protected override Expression VisitChildren(ExpressionVisitor visitor)
+    {
+        return base.VisitChildren(visitor);
     }
 }
